@@ -4,7 +4,7 @@
         <img :src="currentCat.image" alt="" class="cat-image">
          <div class="button-group">
             <button @click="previous">back</button>
-                <button v-for="index in totalCats" :key="index" @click="selectCat(index)">
+                <button v-for="index in totalCats" :key="index" @click="selectCat(index)"  :class="{ active: index === currentCatIndex }">
                     {{index}}
                 </button>
             <button @click="next">next</button>
@@ -21,7 +21,8 @@ export default {
     ...mapGetters([
         'cats',
         'currentCat',
-        'totalCats'
+        'totalCats',
+        'currentCatIndex',
     ])
   },
   methods: {
@@ -29,7 +30,7 @@ export default {
         'previous',
         'next',
         'selectCat'
-    ])
+    ]),
   }
 }
 </script>
@@ -45,6 +46,10 @@ export default {
         margin:5px;
     }
     button:hover {
+        background: green;
+        color: white;
+    }
+    .active {
         background: green;
         color: white;
     }

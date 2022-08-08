@@ -97,6 +97,7 @@ const getters = {
     cats: state => state.cats,
     totalCats: state => state.totalCats,
     currentCat: state => state.currentCat,
+    currentCatIndex: state => state.currentCatIndex,
 }
 export default new Vuex.Store ({
     state,
