@@ -4,7 +4,7 @@
         <img :src="currentCat.image" alt="" class="cat-image">
          <div class="button-group">
             <button @click="previous">back</button>
-                <button v-for="index in totalCats" :key="index">
+                <button v-for="index in totalCats" :key="index" @click="selectCat(index)">
                     {{index}}
                 </button>
             <button @click="next">next</button>
@@ -14,7 +14,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-//  :class="{ active: isActive }"
+
 export default {
   name: 'Slider',
   computed: {
@@ -27,11 +27,9 @@ export default {
   methods: {
     ...mapActions([
         'previous',
-        'next'
+        'next',
+        'selectCat'
     ])
-  },
-  created() {
-    // this.$store.dispatch('getSlides')
   }
 }
 </script>

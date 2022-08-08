@@ -64,6 +64,10 @@ const mutations = {
             state.currentCatIndex = 0;
             state.currentCat = state.cats[0]
         }
+    },
+    SELECT_CAT(state, payload) {
+        state.currentCatIndex = payload;
+        state.currentCat = state.cats[state.currentCatIndex-1]
     }
 }
 const actions = {
@@ -83,6 +87,9 @@ const actions = {
     },
     next({commit}) {
         commit('NEXT_CAT');
+    },
+    selectCat({commit} , payload) {
+        commit('SELECT_CAT', payload);
     }
 }
 
