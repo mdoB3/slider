@@ -4,8 +4,8 @@
         <img :src="currentCat.image" alt="" class="cat-image">
          <div class="button-group">
             <button @click="previous">back</button>
-                <button v-for="index in totalCats" :key="index" @click="selectCat(index)"  :class="{ active: index === currentCatIndex }">
-                    {{index}}
+                <button v-for="(n,i) in totalCats" :key="i" @click="selectCat(i)"  :class="{ active: i === currentCatIndex }">
+                    {{i +1}}
                 </button>
             <button @click="next">next</button>
         </div>
