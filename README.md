@@ -1,13 +1,17 @@
 # slider
-
+...
+Simple dynamic cats slider
+...
 ## Project setup
 ```
-yarn install
+using node v14.19.3 (npm v6.14.17)
+please use node version <= 14
+npm install || yarn install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-yarn serve
+npm run serve || yarn serve
 ```
 
 ### Compiles and minifies for production
