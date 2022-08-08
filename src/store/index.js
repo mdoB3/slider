@@ -67,7 +67,7 @@ const mutations = {
     },
     SELECT_CAT(state, payload) {
         state.currentCatIndex = payload;
-        state.currentCat = state.cats[state.currentCatIndex-1]
+        state.currentCat = state.cats[state.currentCatIndex]
     }
 }
 const actions = {
