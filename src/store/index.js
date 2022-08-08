@@ -6,7 +6,9 @@ Vue.use(Vuex);
 
 const state = {
     cats: [],
-    slideNumber: undefined,
+    totalCats: 0,
+    currentCat: {},
+    currentCatIndex: 0,
     catsImages : [
         'https://cdn.pixabay.com/photo/2017/06/12/19/02/cat-2396473__480.jpg',
         'https://cdn.pixabay.com/photo/2015/06/03/13/13/cats-796437__480.jpg',
@@ -32,10 +34,38 @@ const state = {
 };
 const mutations = {
     ADD_CAT(state, payload) {
+        if (!state.cats.length) {
+            state.currentCat = payload;
+        }
         state.cats.push(payload);
+        state.totalCats += 1;
+    },
+    DELETE_CAT(state) {
+        state.cats.pop();
+        if (state.totalCats !== 0) state.totalCats -= 1;
+    },
+    SET_CURRENT_CAT (state){
+        state.currentCat = state.cats[0]
+    },
+    PREVIOUS_CAT(state) {
+        state.currentCatIndex -= 1;
+        if(state.currentCatIndex < 0) {
+            state.currentCatIndex = state.cats.length-1;
+            state.currentCat = state.cats[state.cats.length-1]
+        } else {
+            state.currentCat = state.cats[state.currentCatIndex];
+        }
+    },
+    NEXT_CAT(state) {
+        state.currentCatIndex += 1;
+        if(state.currentCatIndex < state.totalCats) {
+            state.currentCat = state.cats[state.currentCatIndex]
+        } else {
+            state.currentCatIndex = 0;
+            state.currentCat = state.cats[0]
+        }
     }
 }
-// #1074,
 const actions = {
     addCat({ commit }) {
             const cat = {
@@ -43,14 +73,23 @@ const actions = {
                 image: this.state.catsImages[Math.floor(Math.random()*this.state.catsImages.length)]
             }
             commit('ADD_CAT', cat);
+            commit('SET_CURRENT_CAT')
     },
     deleteCat({commit}) {
         commit('DELETE_CAT');
+    },
+    previous({commit}) {
+        commit('PREVIOUS_CAT');
+    },
+    next({commit}) {
+        commit('NEXT_CAT');
     }
 }
 
 const getters = {
-    slides: state => state.slides,
+    cats: state => state.cats,
+    totalCats: state => state.totalCats,
+    currentCat: state => state.currentCat,
 }
 export default new Vuex.Store ({
     state,
